@@ -2,13 +2,13 @@
 
 海水正在灌进北岬三号泵房。你有一把脉冲铆枪，还可以把整间泵房变成武器：拧开红阀，等贴水巡检机聚到一起，朝叶轮旁的黄环打一发。
 
-**[下载游戏 · 单个 HTML](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.0/tidemark-backflow.html)** · **[下载实机短片 · 1080p / 60 fps / 有声](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.0/backflow-1080p60.mp4)** · [第一版 checkpoint](https://github.com/ericyanpek/astra62-fps-demo/tree/v1.0.0)
+**[▶ 在线试玩](https://ericyanpek.github.io/astra62-fps-demo/)** · [下载离线版 · 单个 HTML](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.0/tidemark-backflow.html) · [下载实机短片 · 1080p / 60 fps / 有声](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.0/backflow-1080p60.mp4) · [第一版 checkpoint](https://github.com/ericyanpek/astra62-fps-demo/tree/v1.0.0)
 
-[![《倒灌》标题画面：海水漫过地面，三号叶轮居于泵房尽头](media/title.webp)](media/title.webp)
+[![《倒灌》标题画面：海水漫过地面，三号叶轮居于泵房尽头](media/preview/title.webp)](media/title.webp)
 
 ## 怎么玩
 
-下载上面的 HTML，双击，用支持 WebGL 的桌面浏览器打开即可。也可以下载或克隆本仓库，打开根目录的 `index.html`。不需要构建、账号、服务器或联网；场景、贴图和声音均由代码生成。
+用支持 WebGL 的浏览器打开[在线试玩](https://ericyanpek.github.io/astra62-fps-demo/)，点击标题画面的按钮即可进入泵房，无需账号。想离线玩，可以下载上面的 HTML，或克隆本仓库后直接打开根目录的 `index.html`。场景、贴图和声音都由代码生成。
 
 | 操作 | 键鼠 |
 | --- | --- |
@@ -22,10 +22,10 @@
 
 | 倒灌 | 泄压 | 退潮 |
 | :---: | :---: | :---: |
-| [![海水漫过泵房内的货箱，左侧的红阀亮起](media/backflow.webp)](media/backflow.webp) | [![浪头从泄压靶前向飞行中的巡检机扩散](media/waterhammer.webp)](media/waterhammer.webp) | [![主泵运转后地面积水退去，露出控制台基座](media/low-water.webp)](media/low-water.webp) |
+| [![海水漫过泵房内的货箱，左侧的红阀亮起](media/preview/backflow.webp)](media/backflow.webp) | [![浪头从泄压靶前向飞行中的巡检机扩散](media/preview/waterhammer.webp)](media/waterhammer.webp) | [![主泵运转后地面积水退去，露出控制台基座](media/preview/low-water.webp)](media/low-water.webp) |
 | 去西边开启 **01 旁通阀**。 | 射击 **02 黄环**。水锤扫得到贴水机，扫不到高挂机。 | 在 **03 主泵** 按 E，观察水位下降。 |
 
-截图均为 2560 × 1440 原生游戏画面，无损 WebP，点图可看原尺寸。短片从同一游戏逐帧录制，配游戏合成音效；剪去了部分移动和轮次等待。
+点击预览图可看 2560 × 1440 的无损实机原图。短片从同一游戏逐帧录制，配游戏合成音效；剪去了部分移动和轮次等待。
 
 ## 这是怎样做出来的
 
