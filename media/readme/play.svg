@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="68" viewBox="0 0 300 68" role="img" aria-labelledby="label">
+  <title id="label">立即在线试玩 · Play in browser</title>
+  <rect x="1" y="1" width="298" height="66" rx="9" fill="#ffb45b" stroke="#473420" stroke-width="2"/>
+  <circle cx="36" cy="34" r="20" fill="#12282b"/>
+  <path d="M31 25.5 45 34 31 42.5Z" fill="#ffbf73"/>
+  <g fill="#14282a">
+    <text x="71" y="23" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="10" font-weight="700" letter-spacing="2">PLAY IN BROWSER</text>
+    <text x="69" y="50" font-family="system-ui,'PingFang SC','Microsoft YaHei',sans-serif" font-size="24" font-weight="750">立即在线试玩</text>
+  </g>
+  <path d="M245 16v36" stroke="#a26834"/>
+  <path d="M258 34h23m-9-9 9 9-9 9" fill="none" stroke="#14282a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
