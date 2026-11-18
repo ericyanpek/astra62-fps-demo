@@ -1,0 +1,80 @@
+#stage {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: 100%; height: 100%; height: 100dvh;
+  overflow: hidden;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --ui-t: max(12px, calc(var(--safe-t) + 4px));
+  --ui-r: max(14px, calc(var(--safe-r) + 6px));
+  --ui-b: max(8px, calc(var(--safe-b) + 3px));
+  --ui-l: max(14px, calc(var(--safe-l) + 6px));
+  --deck: calc(var(--ui-b) + 45px);
+  --stick-size: clamp(80px, 20vmin, 100px);
+  --fire-size: 60px;
+}
+.touch-help { display: none }
+.touch-ui, .touch-ui body { overscroll-behavior: none; -webkit-text-size-adjust: 100% }
+.touch-ui #stage { -webkit-user-select: none; user-select: none }
+.touch-ui #frame { inset: var(--ui-t) var(--ui-r) var(--ui-b) var(--ui-l) }
+.touch-ui main {
+  padding: calc(var(--ui-t) + 9px) calc(var(--ui-r) + 10px)
+           calc(var(--ui-b) + 12px) calc(var(--ui-l) + 10px);
+  pointer-events: auto; overflow-y: auto; overscroll-behavior: contain;
+  justify-content: flex-start; align-items: flex-start;
+}
+.touch-ui main > * { flex: none }
+.touch-ui .flag { position: static; margin-bottom: 20px }
+.touch-ui #kicker { margin-top: auto }
+.touch-ui .plate, .touch-ui #controls, .touch-ui #compass, .touch-ui .instrument { display: none }
+.touch-ui .title { font-size: clamp(46px, 14vmin, 78px); margin: 6px 0 2px }
+.touch-ui .en { font-size: clamp(22px, 6vmin, 34px) }
+.touch-ui .desc { max-width: 31em; margin: 12px 0 16px; line-height: 1.55 }
+.touch-ui .desc br { display: none }
+.touch-ui .actions { gap: 10px }
+.touch-ui .primary, .touch-ui .secondary { min-height: 44px }
+.touch-ui .touch-help { display: block; margin: 10px 0 0; max-width: 32em; color: #d7e4dd; font: 12px/1.5 system-ui,sans-serif }
+.touch-help span { display: none }
+.touch-ui #hydrograph { max-width: 100% }
+.touch-ui #hydrograph svg { width: clamp(72px, 24vmin, 132px) }
+
+.touch-ui #hud { padding: 0 }
+.touch-ui #mission { position: absolute; top: var(--ui-t); left: var(--ui-l); right: calc(var(--ui-r) + 145px) }
+.touch-ui #wave { font-size: 9px; letter-spacing: .09em }
+.touch-ui #goal { font-size: 12px; line-height: 1.3; margin-top: 3px }
+.touch-ui #feed { margin-top: 2px; font-size: 10px }
+.touch-ui #tideGauge { top: var(--ui-t); right: calc(var(--ui-r) + 54px); min-width: 0; width: 80px; padding: 4px 5px; gap: 0; white-space: nowrap }
+.touch-ui #tideGauge .tideGlyph { display: none }
+.touch-ui #depth { font-size: 16px }
+.touch-ui .scale { width: 52px }
+.touch-ui #toast { top: calc(var(--ui-t) + 69px); width: min(76%, 400px); white-space: normal; font-size: 12px }
+.touch-ui #tip { top: calc(50% + 24px); bottom: auto; width: max-content; max-width: min(46%, 290px); white-space: normal; font-size: 11px; padding: 4px 8px }
+.touch-ui .bottom { bottom: var(--ui-b) }
+.touch-ui .bottom.l { left: var(--ui-l) }
+.touch-ui .bottom.r { right: var(--ui-r) }
+.touch-ui .bottom small { font-size: 10px; line-height: 12px }
+.touch-ui .digits { font-size: 20px; line-height: 1 }
+.touch-ui .meter { margin-top: 2px; width: 62px; height: 3px }
+.touch-ui #stick { bottom: var(--deck); left: var(--ui-l); width: var(--stick-size); height: var(--stick-size) }
+.touch-ui #touch button { font: 600 14px/1 system-ui,sans-serif; padding: 0; -webkit-tap-highlight-color: transparent }
+.touch-ui #touch button:active { background: #976932 }
+.touch-ui #touch #tf { bottom: var(--deck); right: var(--ui-r); width: var(--fire-size); height: var(--fire-size); color: #ffddb1; border-color: #e9b67d; background: #332d25b8 }
+.touch-ui #touch #tr { bottom: var(--deck); right: calc(var(--ui-r) + var(--fire-size) + 10px) }
+.touch-ui #touch #te { bottom: calc(var(--deck) + var(--fire-size) + 10px); right: var(--ui-r); width: var(--fire-size); height: 44px }
+.touch-ui #touch #tp { top: var(--ui-t); bottom: auto; right: var(--ui-r); width: 44px; height: 44px }
+
+@media (orientation: portrait) {
+  .touch-ui .touch-help span { display: block; color: #e8bc88 }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .touch-ui .flag { display: none }
+  .touch-ui .title { font-size: 38px; margin: 3px 0 }
+  .touch-ui .en { font-size: 21px }
+  .touch-ui .desc, .touch-ui #endStats { margin: 6px 0 9px }
+  .touch-ui #hydrograph { padding: 3px 8px; margin-bottom: 4px }
+  .touch-ui #hydrograph svg { height: 27px }
+  .touch-ui .touch-help { margin-top: 5px }
+  .touch-ui #toast { top: calc(var(--ui-t) + 47px) }
+}

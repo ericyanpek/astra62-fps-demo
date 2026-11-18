@@ -8,7 +8,7 @@
 
 海水漫过货箱时，一把铆枪未必够用。西边有个红色旁通阀，叶轮旁有个黄环。等巡检机贴着水面飞近，你就知道它们是干什么的了。
 
-[实机短片 · 1080p60 有声](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.0/backflow-1080p60.mp4)　/　[下载离线版 · 单个 HTML](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.0/tidemark-backflow.html)　/　[标题画面 · 1440p 原图](media/title.webp)
+[实机短片 · 1080p60 有声](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.0/backflow-1080p60.mp4)　/　[下载离线版 · 单个 HTML](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.1/tidemark-backflow.html)　/　[标题画面 · 1440p 原图](media/title.webp)
 
 ## 第一次进泵房
 
@@ -18,7 +18,7 @@
 | :--- | :--- | :--- |
 | **WASD** 移动 · **Shift** 奔跑 · **空格** 跳跃 | 鼠标瞄准 · **左键** 发射 · **右键** 聚焦 · **R** 换芯 | **E** 开阀或启动主泵 · **Esc** 暂停 |
 
-**触屏：** 左拇指推摇杆，右拇指拖动画面瞄准。射击和换芯在右侧；靠近设备时会出现交互按钮。
+**手机：** 横竖屏都能玩，横屏视野更宽。左拇指推摇杆，右拇指拖动画面瞄准，也可以按住「发射」边打边瞄。灵动岛和底部手势区留给系统，浏览器工具栏展开时按钮会随画面移动。
 
 ## 一次水锤，三格实录
 
@@ -41,6 +41,7 @@ Astra 6.2 用一句英文创作需求做出了第一版《潮痕》。留好 che
 - `src/` 包含场景、材质、玩法、音效和渲染源码。`hydraulics.js` 负责动态水面、旁通阀与水锤。Three.js 随附[原始许可证](src/LICENSE.three)。
 - `python3 src/build.py` 从源码重新生成 `index.html`，无需 npm。
 - `tools/verify.cjs` 用离线 Chrome 实际操作游戏，验证三轮通关、失败重开、掩体碰撞、水锤判定和触屏操作。
+- `tools/verify-phone.cjs` 模拟 iPhone 15 Pro Max 的横竖屏、浏览器工具栏和安全区；可设 `PHONE_ENGINE=webkit` 并安装 Playwright WebKit 来检查另一种浏览器引擎。
 - `tools/record.cjs` 将 1080p60 片段保存到 `artifacts/`。验证和录制需要 Node.js、Playwright 和 Chrome，录制另需 FFmpeg。可用 `PLAYWRIGHT_MODULE` 指向已有的 Playwright 安装。
 
 ```sh
