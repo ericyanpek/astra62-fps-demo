@@ -1,0 +1,11 @@
+# Local development and generated captures
+.DS_Store
+.env
+.env.*
+.aws/
+.codex/
+node_modules/
+__pycache__/
+.playwright-mcp/
+artifacts/
+*.mp4
