@@ -41,6 +41,7 @@
 .touch-ui #hydrograph svg { width: clamp(72px, 24vmin, 132px) }
 
 .touch-ui #hud { padding: 0 }
+.touch-ui #ammo { -webkit-tap-highlight-color: transparent; user-select: none }
 .touch-ui #mission { position: absolute; top: var(--ui-t); left: var(--ui-l); right: calc(var(--ui-r) + 145px) }
 .touch-ui #wave { font-size: 9px; letter-spacing: .09em }
 .touch-ui #goal { font-size: 12px; line-height: 1.3; margin-top: 3px }

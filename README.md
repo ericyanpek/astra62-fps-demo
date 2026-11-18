@@ -8,9 +8,9 @@
 
 [![点击封面进入游戏：三号泵房的巨型叶轮前，一发脉冲点亮了水面](media/readme/backflow-cover.webp)][play]
 
-海水漫过货箱时，一把铆枪未必够用。西边有个红色旁通阀，叶轮旁有个黄环。等巡检机贴着水面飞近，你就知道它们是干什么的了。
+你拿着北岬防汛队留下的「断潮」R-03 脉冲步枪。海水漫过货箱时，枪不是唯一能用的东西。西边有个红色旁通阀，叶轮旁有个黄环。等巡检机贴着水面飞近，你就知道它们是干什么的了。
 
-[实机短片 · 1080p60 有声](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.0/backflow-1080p60.mp4)　/　[下载离线版 · 单个 HTML](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.1/tidemark-backflow.html)　/　[标题画面 · 1440p 原图](media/title.webp)
+[实机短片 · 1080p60 有声](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.0.0/backflow-1080p60.mp4)　/　[下载离线版 · 单个 HTML](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.1.0/tidemark-backflow.html)　/　[标题画面 · 1440p 原图](media/title.webp)
 
 ## 第一次进泵房
 
@@ -18,9 +18,20 @@
 
 | 移动 | 战斗 | 与泵房交互 |
 | :--- | :--- | :--- |
-| **WASD** 移动 · **Shift** 奔跑 · **空格** 跳跃 | 鼠标瞄准 · **左键** 发射 · **右键** 聚焦 · **R** 换芯 | **E** 开阀或启动主泵 · **Esc** 暂停 |
+| **WASD** 移动 · **Shift** 奔跑 · **空格** 跳跃 | 鼠标瞄准 · **左键** 发射 · **右键** 举镜 · **R** 换匣 · **V** 检视 | **E** 开阀或启动主泵 · **Esc** 暂停 |
 
-**手机：** 横竖屏都能玩，横屏视野更宽。左拇指推摇杆，右拇指拖动画面瞄准，也可以按住「发射」边打边瞄。灵动岛和底部手势区留给系统，浏览器工具栏展开时按钮会随画面移动。
+**手机：** 横竖屏都能玩，横屏视野更宽。左拇指推摇杆，右拇指拖动画面瞄准，也可以按住「发射」边打边瞄。点右下弹量可检视步枪。发射后点「换匣」：旧匣离开后，枪身读数变成「--」；新匣扣合才显示 16。灵动岛和底部手势区留给系统，浏览器工具栏展开时按钮会随画面移动。
+
+<details>
+<summary>查看实机：翻过枪身，看「断潮」的泵务编号</summary>
+
+![R-03 的检视视角：三号泵房的叶轮前，枪身侧面露出 03 白字和褪色的警示贴](media/preview/breakwater-inspect.webp)
+
+[观看换匣动作 · 3 秒，1080p60，有声](https://github.com/ericyanpek/astra62-fps-demo/releases/download/v2.1.0/r03-reload-1080p60.mp4)
+
+</details>
+
+从出生点往前走，靠左的检修盖板会让靴声从闷响变成金属回声。第二轮的两队贴水机会在泵房中段交汇：等机腹下出现水纹再打黄环，水锤才够得着它们。第三轮若听到两声上扬的扫描音，看脚边的双环，在它收紧前走出去。
 
 ## 一次水锤，三格实录
 
@@ -33,7 +44,7 @@
 
 ## 一句提示词之后
 
-Astra 6.2 用一句英文创作需求做出了第一版《潮痕》。留好 checkpoint 后，它又独立迭代了一轮，做出现在的《倒灌》。可以对照[两轮创作提示词](docs/experiment.md)、[第一版源码](https://github.com/ericyanpek/astra62-fps-demo/tree/v1.0.0)和[第二版发布记录](https://github.com/ericyanpek/astra62-fps-demo/releases/tag/v2.0.0)。
+Astra 6.2 用一句英文创作需求做出了第一版《潮痕》。留好 checkpoint 后，它又独立迭代了一轮，做出《倒灌》的水锤和排水流程。后续根据试玩反馈调整了移动、脚步、步枪与射击反馈和巡检机行为。可以对照[两轮创作提示词](docs/experiment.md)、[第一版源码](https://github.com/ericyanpek/astra62-fps-demo/tree/v1.0.0)和[第二版发布记录](https://github.com/ericyanpek/astra62-fps-demo/releases/tag/v2.0.0)。
 
 <details>
 <summary><strong>从源码运行、验证或录制</strong></summary>
@@ -41,6 +52,7 @@ Astra 6.2 用一句英文创作需求做出了第一版《潮痕》。留好 che
 离线版和仓库根目录的 `index.html` 都能直接双击打开。场景、贴图和声音由代码生成，运行游戏不需要安装依赖。
 
 - `src/` 包含场景、材质、玩法、音效和渲染源码。`hydraulics.js` 负责动态水面、旁通阀与水锤。Three.js 随附[原始许可证](src/LICENSE.three)。
+- 「断潮」的[原创模型与导出脚本](tools/art/breakwater)随源码保留。`src/breakwater.mesh` 是导出的游戏网格，`src/breakwater.js` 负责材质、持握、检视和换匣。只有重新制作网格时才需要 Blender 和 liblz4。
 - `python3 src/build.py` 从源码重新生成 `index.html`，无需 npm。
 - `tools/verify.cjs` 用离线 Chrome 实际操作游戏，验证三轮通关、失败重开、掩体碰撞、水锤判定和触屏操作。
 - `tools/verify-phone.cjs` 模拟 iPhone 15 Pro Max 的横竖屏、浏览器工具栏和安全区；可设 `PHONE_ENGINE=webkit` 并安装 Playwright WebKit 来检查另一种浏览器引擎。

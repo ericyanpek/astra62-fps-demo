@@ -31,6 +31,9 @@ const runs=[
     const rect=s=>page.locator(s).boundingBox();
     const screenshot=name=>page.screenshot({path:path.join(out,name+'.png'),scale:'css'});
     for(const [label,w,h,insets] of runs){
+      // Each layout starts in the same state. Waiting through six reloads in one
+      // encounter would let the patrol kill the stationary player mid-assertion.
+      if(label!==runs[0][0]){await page.goto(url);await page.waitForFunction(()=>window.__tidemark);await page.evaluate(()=>__tidemark.manual())}
       await page.setViewportSize({width:w,height:h});
       // Desktop engines do not supply physical cutouts. Exercise the same custom properties
       // that resolve env(safe-area-inset-*) on a phone; don't add fake browser chrome to captures.
@@ -56,12 +59,20 @@ const runs=[
       assert.equal((await snap()).mode,'playing');
       // Include the contextual valve button's footprint even in the first wave.
       await page.locator('#te').evaluate(el=>el.classList.remove('hide'));
-      await check(['mission','tideGauge','tp','stick','tf','tr','te','life','ammo'],['tp','stick','tf','tr','te']);
+      await check(['mission','tideGauge','tp','stick','tf','tr','te','life','ammo'],['tp','stick','tf','tr','te','ammo']);
       await page.locator('#te').evaluate(el=>el.classList.add('hide'));
-      const shot=(await snap()).shots;await page.locator('#tf').tap();await step(.18);
-      assert.equal((await snap()).shots,shot+1);
+      const hero=label==='portrait-bars'||label==='landscape-short';
+      const shot=(await snap()).shots;await page.locator('#ammo').tap();const inspected=await step(.66);
+      assert.ok(inspected.tool.inspect>.99&&[...inspected.tool.tip,...inspected.tool.heel].every(v=>Math.abs(v)<.98),`${label}: cropped inspection ${JSON.stringify(inspected.tool)}`);
+      if(hero)await screenshot(label+'-inspect');
+      await page.locator('#tf').tap();const fired=await step(.32);assert.equal(fired.shots,shot+1);assert.ok(fired.tool.inspect<.01);
       if(label==='landscape-short'||label==='portrait-bars'){await step(.2);await screenshot(label)}
-      await page.locator('#tr').tap();await step(1.25);assert.equal((await snap()).rounds,16);
+      await page.locator('#tr').tap();const gap=await step(.84);
+      assert.ok(gap.tool.packs.every(p=>!p.visible&&p.screen[1]<-1),`${label}: magazine switch inside viewport`);
+      const incoming=await step(.37),mag=incoming.tool.packs.find(p=>p.visible);
+      assert.ok(!incoming.tool.docked&&incoming.tool.display==='--'&&mag.id===1&&mag.lit===4&&mag.screen.every(v=>Math.abs(v)<.98),`${label}: incoming magazine ${JSON.stringify(incoming.tool)}`);
+      if(hero)await screenshot(label+'-reload');
+      const ready=await step(incoming.reloading+.02);assert.equal(ready.rounds,16);assert.equal(ready.tool.display,'16');
       await page.locator('#tp').tap();assert.equal((await snap()).mode,'paused');
     }
     await page.locator('#start').tap();
@@ -89,10 +100,15 @@ const runs=[
       const pad=await rect('#stick'),fire=await rect('#tf');
       const p={id:1,x:pad.x+pad.width/2,y:pad.y+pad.height/2},f={id:2,x:fire.x+fire.width/2,y:fire.y+fire.height/2};
       const send=(type,touchPoints)=>c.send('Input.dispatchTouchEvent',{type,touchPoints});
+      await send('touchStart',[p]);await send('touchMove',[{...p,x:p.x+2}]);const drift=await step(.55);
+      assert.deepEqual(drift.player,a.player);assert.equal(drift.gait.steps,a.gait.steps);
+      await send('touchMove',[{...p,x:p.x+pad.width*.36*.25}]);const creep=await step(.44);await send('touchEnd',[]);await step(.25);
+      const slowDist=Math.hypot(creep.player[0]-a.player[0],creep.player[2]-a.player[2]);assert.ok(slowDist>.06&&slowDist<.36,`thumb creep ${slowDist}`);assert.equal(creep.gait.steps,a.gait.steps);
       await send('touchStart',[p,f]);await send('touchMove',[{...p,y:p.y-30},{...f,x:f.x-24}]);
       const moving=await step(.4);await send('touchEnd',[]);const resting=await step(.4);
       assert.ok(moving.player[2]<a.player[2]-.5&&Math.abs(moving.yaw-a.yaw)>.03&&moving.shots>a.shots);
-      assert.deepEqual(resting.player.filter((_,i)=>i!==1),moving.player.filter((_,i)=>i!==1));assert.equal(resting.shots,moving.shots);
+      const coast=Math.hypot(resting.player[0]-moving.player[0],resting.player[2]-moving.player[2]);assert.ok(coast<.15,`stick release coast ${coast}`);assert.equal(resting.gait.speed,0);assert.equal(resting.shots,moving.shots);
+      const held=await step(.45);assert.deepEqual([held.player[0],held.player[2],held.gait.steps],[resting.player[0],resting.player[2],resting.gait.steps]);
     }
     assert.deepEqual(errors,[]);console.log(`${engine}: ${runs.length} phone layouts; safe areas, controls, toolbar resize and orientation passed`);
   }finally{await browser.close()}

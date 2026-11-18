@@ -14,7 +14,9 @@ function resetTouchInput(){moveId=aimId=fireId=null;centerPad()}
 function movePad(e){
   const box=pad.getBoundingClientRect(),radius=box.width*.36;
   const x=(e.clientX-box.x-box.width/2)/radius,y=(e.clientY-box.y-box.height/2)/radius;
-  const length=Math.max(1,Math.hypot(x,y));stickX=x/length;stickY=y/length;
+  const length=Math.hypot(x,y),travel=Math.min(1,length);
+  // A resting thumb can drift a few pixels. Keep the outer rim at full speed.
+  const power=Math.pow(Math.max(0,(travel-.085)/.915),1.12);stickX=length?power*x/length:0;stickY=length?power*y/length:0;
   pad.firstElementChild.style.transform=`translate(${stickX*radius*.74}px,${stickY*radius*.74}px)`;
 }
 function beginAim(e){if(aimId===null){aimId=e.pointerId;aimX=e.clientX;aimY=e.clientY}}
@@ -45,3 +47,5 @@ fireKey.onpointerdown=e=>{
   fireId=e.pointerId;fireKey.setPointerCapture(fireId);beginAim(e);fireHeld=true;shotQueue=true;
 };
 $('tr').onclick=reload;$('te').onclick=useGate;$('tp').onclick=pause;
+
+$('ammo').onclick=toggleInspection;
